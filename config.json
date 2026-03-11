@@ -36,6 +36,20 @@
         ],
         "mime": {
         },
+        "db_clients": [
+            {
+                "name": "",
+                "rdbms": "postgresql",
+                "host": "localhost",
+                "port": 5432,
+                "dbname": "barbearia",
+                "user": "vitorpp10",
+                "password": "Padua@123321",
+                "is_fast": false,
+                "connection_number": 1,
+                "filename": ""
+            }
+        ],
         "locations": [
             {
                 "default_content_type": "text/plain",

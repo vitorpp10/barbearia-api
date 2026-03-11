@@ -1,0 +1,5 @@
+CREATE TABLE clientes
+(
+    id INTEGER NOT NULL PRIMARY KEY,
+    nome VARCHAR(100)
+)

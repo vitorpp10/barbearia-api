@@ -9,6 +9,6 @@ class CadastroController : public drogon::HttpSimpleController<CadastroControlle
   public:
     void asyncHandleHttpRequest(const HttpRequestPtr& req, std::function<void (const HttpResponsePtr &)> &&callback) override;
     PATH_LIST_BEGIN
-        PATH_ADD("/api/cadastro", Get, Options);
+        PATH_ADD("/api/cadastro", Get, Post, Options);
     PATH_LIST_END
 };
