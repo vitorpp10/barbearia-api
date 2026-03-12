@@ -1,7 +1,7 @@
-#include "CadastroController.h"
+#include "RegisterController.h"
 #include<string>
 
-void CadastroController::asyncHandleHttpRequest(const HttpRequestPtr& req, std::function<void (const HttpResponsePtr &)> &&callback)
+void RegisterController::asyncHandleHttpRequest(const HttpRequestPtr& req, std::function<void (const HttpResponsePtr &)> &&callback)
 {
     Json::Value json;
     auto resp = HttpResponse::newHttpJsonResponse(json);
@@ -14,10 +14,10 @@ void CadastroController::asyncHandleHttpRequest(const HttpRequestPtr& req, std::
         return;
     }
 
-    std::string clientName = (*receive_json)["clientes"].asString();
+    std::string clientName = (*receive_json)["clients"].asString();
 
     auto client = drogon::app().getDbClient();
-    std::string sql_command = "INSERT INTO clientes (nome) VALUES ($1)";
+    std::string sql_command = "INSERT INTO clients (nome) VALUES ($1)";
 
     client->execSqlAsync
     (
@@ -32,7 +32,6 @@ void CadastroController::asyncHandleHttpRequest(const HttpRequestPtr& req, std::
         resp->addHeader("Access-Control-Allow-Origin", "*");
         resp->addHeader("Access-Control-Allow-Methods", "*");
         resp->addHeader("Access-Control-Allow-Headers", "*");
-
         callback(resp);
     },
     [callback](const drogon::orm::DrogonDbException &db_error)
@@ -45,7 +44,6 @@ void CadastroController::asyncHandleHttpRequest(const HttpRequestPtr& req, std::
         resp->addHeader("Access-Control-Allow-Origin", "*");
         resp->addHeader("Access-Control-Allow-Methods", "*");
         resp->addHeader("Access-Control-Allow-Headers", "*");
-
         callback(resp);
     },
     clientName

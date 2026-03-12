@@ -1,6 +1,6 @@
-#include "TesteController.h"
+#include "TestController.h"
 
-void TesteController::asyncHandleHttpRequest(const HttpRequestPtr& req, std::function<void (const HttpResponsePtr &)> &&callback)
+void TestController::asyncHandleHttpRequest(const HttpRequestPtr& req, std::function<void (const HttpResponsePtr &)> &&callback)
 {
     Json::Value json;
     json["message"] = "";

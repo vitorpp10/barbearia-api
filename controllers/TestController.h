@@ -4,12 +4,12 @@
 
 using namespace drogon;
 
-class TesteController : public drogon::HttpSimpleController<TesteController>
+class TestController : public drogon::HttpSimpleController<TestController>
 {
   public:
     void asyncHandleHttpRequest(const HttpRequestPtr& req, std::function<void (const HttpResponsePtr &)> &&callback) override;
 
     PATH_LIST_BEGIN
-        PATH_ADD("/api/teste", Get, Options);
+        PATH_ADD("/api/test", Get, Options);
     PATH_LIST_END
 };
