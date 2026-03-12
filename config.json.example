@@ -1,0 +1,27 @@
+{
+  "listeners": [
+    {
+      "address": "0.0.0.0",
+      "port": 8080,
+      "https": false
+    }
+  ],
+  "db_clients": [
+    {
+      "name": "default",
+      "rdbms": "postgresql",
+      "host": "127.0.0.1",
+      "port": 5432,
+      "dbname": "barbearia_db",
+      "user": "postgres",
+      "password": "COLOQUE_SUA_SENHA_AQUI",
+      "connection_number": 1,
+      "client_encoding": "UTF8"
+    }
+  ],
+  "app": {
+    "threads_num": 1,
+    "log_path": "./",
+    "document_root": "./front"
+  }
+}

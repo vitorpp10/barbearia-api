@@ -1,0 +1,24 @@
+-- script de inicialização do banco de dados da Barbearia
+
+-- 1. Cria a tabela de clientes
+CREATE TABLE IF NOT EXISTS clientes (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    telefone VARCHAR(20),
+    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 2. cria uma tabela para os agendamentos
+CREATE TABLE IF NOT EXISTS agendamentos (
+    id SERIAL PRIMARY KEY,
+    cliente_id INTEGER REFERENCES clientes(id),
+    servico VARCHAR(50) NOT NULL,
+    data_hora TIMESTAMP NOT NULL,
+    status VARCHAR(20) DEFAULT 'Pendente'
+);
+
+-- 3. insere alguns dados de teste para você não começar com o banco vazio
+INSERT INTO clientes (nome, telefone) VALUES
+('Vitor (Admin)', '11999999999'),
+('João Silva', '11988888888'),
+('Marcos Cabelo', '11977777777');
