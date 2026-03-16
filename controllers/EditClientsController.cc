@@ -1,7 +1,7 @@
-#include "DeleteClientsController.h"
+#include "EditClientsController.h"
 #include<string>
 
-void DeleteClientsController::asyncHandleHttpRequest(const HttpRequestPtr& req, std::function<void (const HttpResponsePtr &)> &&callback)
+void EditClientsController::asyncHandleHttpRequest(const HttpRequestPtr& req, std::function<void (const HttpResponsePtr &)> &&callback)
 {
     Json::Value json;
     auto resp = HttpResponse::newHttpJsonResponse(json);
@@ -12,6 +12,7 @@ void DeleteClientsController::asyncHandleHttpRequest(const HttpRequestPtr& req, 
         Json::Value errorJson;
         errorJson["message"] = "JSON invalido";
         std::cout << "error json response " << std::endl;
+        auto resp = HttpResponse::newHttpJsonResponse(errorJson);
         resp->addHeader("Access-Control-Allow-Origin", "*");
         resp->addHeader("Access-Control-Allow-Methods", "*");
         resp->addHeader("Access-Control-Allow-Headers", "*");
@@ -19,10 +20,11 @@ void DeleteClientsController::asyncHandleHttpRequest(const HttpRequestPtr& req, 
         return;
     }
 
+    std::string clientName = (*receive_json)["name"].asString();
     int id = (*receive_json)["id"].asInt();
 
     auto client = drogon::app().getDbClient();
-    std::string sql_command = "DELETE FROM clients WHERE id = $1";
+    std::string sql_command = "UPDATE clients SET name = $1 WHERE id = $2";
 
     client->execSqlAsync
     (
@@ -31,7 +33,7 @@ void DeleteClientsController::asyncHandleHttpRequest(const HttpRequestPtr& req, 
     {
         Json::Value successJson;
         successJson["status"] = "success";
-        successJson["message"] = "Deletado do banco";
+        successJson["message"] = "Editado do Banco";
 
         auto resp = HttpResponse::newHttpJsonResponse(successJson);
         resp->addHeader("Access-Control-Allow-Origin", "*");
@@ -51,6 +53,6 @@ void DeleteClientsController::asyncHandleHttpRequest(const HttpRequestPtr& req, 
         resp->addHeader("Access-Control-Allow-Headers", "*");
         callback(resp);
     },
-        id
+        clientName, id
     );
 }

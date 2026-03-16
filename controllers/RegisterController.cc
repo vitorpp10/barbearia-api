@@ -9,12 +9,17 @@ void RegisterController::asyncHandleHttpRequest(const HttpRequestPtr& req, std::
 
     if (!receive_json)
     {
+        Json::Value errorJson;
+        errorJson["message"] = "JSON invalido";
         std::cerr << "error json response" << std::endl;
+        resp->addHeader("Access-Control-Allow-Origin", "*");
+        resp->addHeader("Access-Control-Allow-Methods", "*");
+        resp->addHeader("Access-Control-Allow-Headers", "*");
         callback(resp);
         return;
     }
 
-    std::string clientName = (*receive_json)["clients"].asString();
+    std::string clientName = (*receive_json)["name"].asString();
 
     auto client = drogon::app().getDbClient();
     std::string sql_command = "INSERT INTO clients (nome), VALUES ($1)";
