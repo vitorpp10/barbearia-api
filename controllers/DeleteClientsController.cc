@@ -1,7 +1,7 @@
-#include "RegisterController.h"
+#include "DeleteClientsController.h"
 #include<string>
 
-void RegisterController::asyncHandleHttpRequest(const HttpRequestPtr& req, std::function<void (const HttpResponsePtr &)> &&callback)
+void DeleteClientsController::asyncHandleHttpRequest(const HttpRequestPtr& req, std::function<void (const HttpResponsePtr &)> &&callback)
 {
     Json::Value json;
     auto resp = HttpResponse::newHttpJsonResponse(json);
@@ -9,15 +9,18 @@ void RegisterController::asyncHandleHttpRequest(const HttpRequestPtr& req, std::
 
     if (!receive_json)
     {
-        std::cerr << "error json response" << std::endl;
+        std::cout << "error json response " << std::endl;
+        resp->addHeader("Access-Control-Allow-Origin", "*");
+        resp->addHeader("Access-Control-Allow-Methods", "*");
+        resp->addHeader("Access-Control-Allow-Headers", "*");
         callback(resp);
         return;
     }
 
-    std::string clientName = (*receive_json)["clients"].asString();
+    int id = (*receive_json)["id"].asInt();
 
     auto client = drogon::app().getDbClient();
-    std::string sql_command = "INSERT INTO clients (nome), VALUES ($1)";
+    std::string sql_command = "DELETE FROM clients WHERE id = $1";
 
     client->execSqlAsync
     (
@@ -26,7 +29,7 @@ void RegisterController::asyncHandleHttpRequest(const HttpRequestPtr& req, std::
     {
         Json::Value successJson;
         successJson["status"] = "success";
-        successJson["message"] = "Agendado no Banco";
+        successJson["message"] = "Deletado do banco";
 
         auto resp = HttpResponse::newHttpJsonResponse(successJson);
         resp->addHeader("Access-Control-Allow-Origin", "*");
@@ -46,6 +49,6 @@ void RegisterController::asyncHandleHttpRequest(const HttpRequestPtr& req, std::
         resp->addHeader("Access-Control-Allow-Headers", "*");
         callback(resp);
     },
-    clientName
+        id
     );
 }

@@ -21,6 +21,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_executable(${PROJECT_NAME} main.cc
         controllers/ClientListsController.h
+        controllers/DeleteClientsController.h
 )
 
 # ##############################################################################
