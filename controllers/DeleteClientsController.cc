@@ -19,10 +19,10 @@ void DeleteClientsController::asyncHandleHttpRequest(const HttpRequestPtr& req, 
         return;
     }
 
-    int id = (*receive_json)["id"].asInt();
+    int id = (*receive_json)["id"].as<int>();
 
     auto client = drogon::app().getDbClient();
-    std::string sql_command = "DELETE FROM clients WHERE id = $1";
+    std::string sql_command = "DELETE FROM clientes WHERE id = $1";
 
     client->execSqlAsync
     (

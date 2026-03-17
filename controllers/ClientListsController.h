@@ -8,6 +8,6 @@ class ClientListsController : public drogon::HttpSimpleController<ClientListsCon
     void asyncHandleHttpRequest(const HttpRequestPtr& req, std::function<void (const HttpResponsePtr &)> &&callback) override;
 
     PATH_LIST_BEGIN
-        PATH_ADD("/api/clients", Get, Options);
+        PATH_ADD("/api/clientes", Get, Options);
     PATH_LIST_END
 };

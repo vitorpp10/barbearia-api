@@ -10,6 +10,6 @@ class DeleteClientsController : public drogon::HttpSimpleController<DeleteClient
     void asyncHandleHttpRequest(const HttpRequestPtr& req, std::function<void (const HttpResponsePtr &)> &&callback) override;
 
     PATH_LIST_BEGIN
-        PATH_ADD("/api/clients/delete", Post, Options);
+        PATH_ADD("/api/clientes/delete", Post, Options);
     PATH_LIST_END
 };

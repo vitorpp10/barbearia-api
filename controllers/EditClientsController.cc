@@ -20,11 +20,11 @@ void EditClientsController::asyncHandleHttpRequest(const HttpRequestPtr& req, st
         return;
     }
 
-    std::string clientName = (*receive_json)["name"].asString();
-    int id = (*receive_json)["id"].asInt();
+    std::string clientName = (*receive_json)["name"].as<std::string>();
+    int id = (*receive_json)["id"].as<int>();
 
     auto client = drogon::app().getDbClient();
-    std::string sql_command = "UPDATE clients SET name = $1 WHERE id = $2";
+    std::string sql_command = "UPDATE clientes SET name = $1 WHERE id = $2";
 
     client->execSqlAsync
     (

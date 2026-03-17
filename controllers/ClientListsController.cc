@@ -4,14 +4,14 @@
 void ClientListsController::asyncHandleHttpRequest(const HttpRequestPtr& req, std::function<void (const HttpResponsePtr &)> &&callback)
 {
     auto client = drogon::app().getDbClient();
-    std::string sql_command = "SELECT id, name FROM clients ORDER BY id DESC";
+    std::string sql_command = "SELECT id, name FROM clientes ORDER BY id DESC";
 
     client->execSqlAsync
     (
     sql_command,
     [callback](const drogon::orm::Result &db_result)
     {
-        Json::Value array;
+        Json::Value array(Json::arrayValue);
 
         for (auto const &row : db_result)
         {

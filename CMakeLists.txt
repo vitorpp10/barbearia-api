@@ -23,6 +23,8 @@ add_executable(${PROJECT_NAME} main.cc
         controllers/ClientListsController.h
         controllers/DeleteClientsController.h
         controllers/EditClientsController.cc
+        controllers/SchedulingController.h
+        controllers/SchedulingController.cc
 )
 
 # ##############################################################################

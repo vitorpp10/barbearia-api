@@ -4,12 +4,12 @@
 
 using namespace drogon;
 
-class EditClientsController : public drogon::HttpSimpleController<EditClientsController>
+class SchedulingController : public drogon::HttpSimpleController<SchedulingController>
 {
   public:
     void asyncHandleHttpRequest(const HttpRequestPtr& req, std::function<void (const HttpResponsePtr &)> &&callback) override;
 
     PATH_LIST_BEGIN
-        PATH_ADD("/api/clientes/edit", Get, Post, Options);
+        PATH_ADD("/api/clientes", Get, Post, Options);
     PATH_LIST_END
 };

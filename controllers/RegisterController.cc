@@ -19,10 +19,10 @@ void RegisterController::asyncHandleHttpRequest(const HttpRequestPtr& req, std::
         return;
     }
 
-    std::string clientName = (*receive_json)["name"].asString();
+    std::string clientName = (*receive_json)["name"].as<std::string>();
 
     auto client = drogon::app().getDbClient();
-    std::string sql_command = "INSERT INTO clients (nome), VALUES ($1)";
+    std::string sql_command = "INSERT INTO clientes (nome), VALUES ($1)";
 
     client->execSqlAsync
     (
